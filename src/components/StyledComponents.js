@@ -29,10 +29,10 @@ export const StyledCardsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const StyledCard = styled.div`
+export const StyledCard = styled.button`
   height: 100px;
-  width: 50px;
+  width: 80px;
   border: 1px solid teal;
-  border-radious: 50%;
-  margin: 20px;
+  border-radius: 5px%;
+  margin: 10px;
 `;
