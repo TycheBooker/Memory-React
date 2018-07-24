@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CustomDifficultyWidget from './CustomDifficultyWidget';
 import { StyledButton } from './StyledComponents';
 
 const StartScreen = props => {
@@ -18,6 +19,9 @@ const StartScreen = props => {
           </StyledButton>
         );
       })}
+      <CustomDifficultyWidget
+        changeDifficultyLevel={props.changeDifficultyLevel}
+      />
       <StyledButton primary onClick={props.startGame}>
         Start Game
       </StyledButton>

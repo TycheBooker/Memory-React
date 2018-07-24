@@ -1,3 +1,8 @@
+export const GameConfig = Object.freeze({
+  minSuits: 4,
+  maxBoardSize: 64
+});
+
 export const DifficultyLevels = Object.freeze({
   EASY: { value: 0, name: 'easy', suits: 4, boardSize: 16 },
   MEDIUM: { value: 1, name: 'medium', suits: 6, boardSize: 36 },

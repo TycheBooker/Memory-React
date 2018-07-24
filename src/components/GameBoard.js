@@ -16,14 +16,20 @@ class GameBoard extends Component {
   }
 
   handleOpenCard = card => {
-    this.revealCard(card);
-
-    if (this.state.revealedCards.length === 1) {
-      this.timeout = setTimeout(() => this.resolvePair(), 1000);
-    } else if (this.state.revealedCards.length > 1) {
-      if (this.timeout) clearTimeout(this.timeout);
-      this.resolvePair();
+    if (
+      !this.state.revealedCards.find(
+        revealedCard => revealedCard.id === card.id
+      )
+    ) {
       this.revealCard(card);
+
+      if (this.state.revealedCards.length === 1) {
+        this.timeout = setTimeout(() => this.resolvePair(), 1000);
+      } else if (this.state.revealedCards.length > 1) {
+        if (this.timeout) clearTimeout(this.timeout);
+        this.resolvePair();
+        this.revealCard(card);
+      }
     }
   };
 
