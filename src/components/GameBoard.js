@@ -15,39 +15,38 @@ class GameBoard extends Component {
     if (this.timeout) clearTimeout(this.timeout);
   }
 
-  revealCard = card => {
-    switch (this.state.revealedCards.length) {
-      case 0:
-        this.setState({ revealedCards: [card] });
-        break;
-      case 1:
-        this.setState(prevState => {
-          return {
-            revealedCards: prevState.revealedCards.concat(card)
-          };
-        });
-        this.timeout = setTimeout(() => {
-          if (
-            this.state.revealedCards.length === 2 &&
-            this.state.revealedCards[0].suit ===
-              this.state.revealedCards[1].suit
-          ) {
-            this.setState(prevState => {
-              return {
-                solvedCards: prevState.solvedCards.concat(
-                  prevState.revealedCards
-                ),
-                revealedCards: []
-              };
-            });
-          } else {
-            this.setState({ revealedCards: [] });
-          }
-        }, 1000);
-        break;
-      default:
-        break;
+  handleOpenCard = card => {
+    this.revealCard(card);
+
+    if (this.state.revealedCards.length === 1) {
+      this.timeout = setTimeout(() => this.resolvePair(), 1000);
+    } else if (this.state.revealedCards.length > 1) {
+      if (this.timeout) clearTimeout(this.timeout);
+      this.resolvePair();
+      this.revealCard(card);
     }
+  };
+
+  revealCard = card => {
+    this.setState(prevState => {
+      return {
+        revealedCards: prevState.revealedCards.concat(card)
+      };
+    });
+  };
+
+  resolvePair = () => {
+    if (this.state.revealedCards[0].suit === this.state.revealedCards[1].suit) {
+      this.setState(prevState => {
+        return {
+          solvedCards: prevState.solvedCards.concat(
+            prevState.revealedCards[0],
+            prevState.revealedCards[1]
+          )
+        };
+      });
+    }
+    this.setState({ revealedCards: [] });
   };
 
   render() {
@@ -59,7 +58,7 @@ class GameBoard extends Component {
             <Card
               card={card}
               key={card.id}
-              revealCard={this.revealCard}
+              handleOpenCard={this.handleOpenCard}
               revealed={this.state.revealedCards.includes(card)}
               solved={this.state.solvedCards.includes(card)}
             />

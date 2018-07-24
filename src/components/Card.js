@@ -5,7 +5,7 @@ import { StyledCard } from './StyledComponents';
 const Card = props => {
   return (
     <StyledCard
-      onClick={() => props.revealCard(props.card)}
+      onClick={() => props.handleOpenCard(props.card)}
       disabled={props.solved}
     >
       {props.revealed && props.card.suit}
@@ -16,7 +16,7 @@ const Card = props => {
 
 Card.propTypes = {
   card: PropTypes.object,
-  revealCard: PropTypes.func,
+  handleOpenCard: PropTypes.func,
   revealed: PropTypes.bool,
   solved: PropTypes.bool
 };
