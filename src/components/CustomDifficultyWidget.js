@@ -33,19 +33,33 @@ class CustomDifficultyWidget extends Component {
   handleSuitsChange = event => {
     this.setState({ numberOfSuits: event.target.value });
     let newMinBoardSize = this.getMinBoardSize(event.target.value);
+    let newMaxBoardSize = this.getMaxBoardSize(event.target.value);
     if (this.state.numberOfCards < newMinBoardSize) {
       this.setState({
         numberOfCards: newMinBoardSize
       });
+    } else if (this.state.numberOfCards > newMaxBoardSize) {
+      this.setState({
+        numberOfCards: newMaxBoardSize
+      });
     }
   };
 
-  handgleBoardSizeChange = event => {
+  handleBoardSizeChange = event => {
     this.setState({ numberOfCards: event.target.value });
   };
 
   getMinBoardSize = (numberOfSuits = this.state.numberOfSuits) => {
     return numberOfSuits * 2;
+  };
+
+  getMaxBoardSize = (numberOfSuits = this.state.numberOfSuits) => {
+    let modulo = GameConfig.maxBoardSize % numberOfSuits;
+    if (modulo) {
+      return GameConfig.maxBoardSize - modulo;
+    } else {
+      return GameConfig.maxBoardSize;
+    }
   };
 
   render() {
@@ -75,10 +89,10 @@ class CustomDifficultyWidget extends Component {
                 type="range"
                 name="board-size"
                 min={this.getMinBoardSize()}
-                max={GameConfig.maxBoardSize}
+                max={this.getMaxBoardSize()}
                 step={this.state.numberOfSuits}
                 value={this.state.numberOfCards}
-                onChange={this.handgleBoardSizeChange}
+                onChange={this.handleBoardSizeChange}
               />
               <p>{this.state.numberOfCards}</p>
 
