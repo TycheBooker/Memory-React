@@ -65,7 +65,10 @@ class CustomDifficultyWidget extends Component {
   render() {
     return (
       <Fragment>
-        <StyledButton onClick={this.toggleWidget}>
+        <StyledButton
+          onClick={this.toggleWidget}
+          active={this.props.activeDifficultyLevel.value === 3}
+        >
           Custom Difficulty
         </StyledButton>
         {this.state.isWidgetOpen && (
@@ -106,7 +109,8 @@ class CustomDifficultyWidget extends Component {
 }
 
 CustomDifficultyWidget.propTypes = {
-  changeDifficultyLevel: PropTypes.func
+  changeDifficultyLevel: PropTypes.func,
+  activeDifficultyLevel: PropTypes.object
 };
 
 export default CustomDifficultyWidget;

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CustomDifficultyWidget from './CustomDifficultyWidget';
 import { StyledButton } from './StyledComponents';
+import { capitalizeString } from '../helpers';
 
 const StartScreen = props => {
   return (
@@ -15,12 +16,13 @@ const StartScreen = props => {
             onClick={() => props.changeDifficultyLevel(difficulty)}
             active={difficulty === props.activeDifficultyLevel}
           >
-            {difficulty.name}
+            {capitalizeString(difficulty.name)}
           </StyledButton>
         );
       })}
       <CustomDifficultyWidget
         changeDifficultyLevel={props.changeDifficultyLevel}
+        activeDifficultyLevel={props.activeDifficultyLevel}
       />
       <StyledButton primary onClick={props.startGame}>
         Start Game

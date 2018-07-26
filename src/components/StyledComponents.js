@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const StyledButton = styled.button`
   border-radius: 3px;
   padding: 0.25em 1em;
-  margin: 0 1em;
+  margin: 1em;
   background: transparent;
   color: teal;
   border: 2px solid teal;
@@ -30,9 +30,9 @@ export const StyledCardsContainer = styled.div`
 `;
 
 export const StyledCard = styled.button`
-  height: 100px;
-  width: 80px;
+  height: 7em;
+  width: 5.5em;
   border: 1px solid teal;
-  border-radius: 5px%;
-  margin: 10px;
+  border-radius: 5px;
+  margin: 0.625em;
 `;

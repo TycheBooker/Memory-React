@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import { StyledButton, StyledCardsContainer } from './StyledComponents';
@@ -70,6 +70,14 @@ class GameBoard extends Component {
             />
           ))}
         </StyledCardsContainer>
+        {this.props.deck.length === this.state.solvedCards.length && (
+          <Fragment>
+            <p>Great! You solved it!</p>
+            <p>Start new game?</p>
+            <StyledButton>Yes</StyledButton>
+            <StyledButton>No</StyledButton>
+          </Fragment>
+        )}
       </div>
     );
   }
