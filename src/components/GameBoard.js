@@ -15,10 +15,17 @@ class GameBoard extends Component {
     if (this.timeout) clearTimeout(this.timeout);
   }
 
-  handleOpenCard = card => {
+  getBoardWidth = () => {
+    const cardNumber = this.props.difficultyLevel.boardSize;
+    const height = Math.floor(Math.sqrt(cardNumber));
+    const width = cardNumber / height;
+    return width;
+  };
+
+  handleOpenCard = (card) => {
     if (
       !this.state.revealedCards.find(
-        revealedCard => revealedCard.id === card.id
+        (revealedCard) => revealedCard.id === card.id
       )
     ) {
       this.revealCard(card);
@@ -33,8 +40,8 @@ class GameBoard extends Component {
     }
   };
 
-  revealCard = card => {
-    this.setState(prevState => {
+  revealCard = (card) => {
+    this.setState((prevState) => {
       return {
         revealedCards: prevState.revealedCards.concat(card)
       };
@@ -43,7 +50,7 @@ class GameBoard extends Component {
 
   resolvePair = () => {
     if (this.state.revealedCards[0].suit === this.state.revealedCards[1].suit) {
-      this.setState(prevState => {
+      this.setState((prevState) => {
         return {
           solvedCards: prevState.solvedCards.concat(
             prevState.revealedCards[0],
@@ -59,8 +66,8 @@ class GameBoard extends Component {
     return (
       <div>
         <StyledButton onClick={this.props.quitGame}>Quit Game</StyledButton>
-        <StyledCardsContainer>
-          {this.props.deck.map(card => (
+        <StyledCardsContainer width={this.getBoardWidth()}>
+          {this.props.deck.map((card) => (
             <Card
               card={card}
               key={card.id}
